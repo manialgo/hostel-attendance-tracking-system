@@ -1,0 +1,15 @@
+node_modules/
+.env
+*.log
+npm-debug.log*
+
+# Temporary CSV upload staging area (multer) — never needs to be committed
+uploads_tmp/*
+!uploads_tmp/.gitkeep
+
+# Uncomment the next line if you'd rather NOT version-control the live database
+# (the project spec asks for the DB to be tracked in git, so it is included by default)
+# database/hostel.db
+
+.DS_Store
+Thumbs.db

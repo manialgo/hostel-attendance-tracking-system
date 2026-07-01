@@ -1,0 +1,25 @@
+{
+  "name": "hostel-attendance-register",
+  "version": "1.0.0",
+  "description": "Hostel Attendance Register - a git-hosted, self-contained (SQLite) academic attendance tracking application",
+  "main": "server/index.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server/index.js",
+    "dev": "node server/index.js",
+    "init-db": "node server/db.js --init"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "bcryptjs": "^2.4.3",
+    "multer": "^1.4.5-lts.1",
+    "csv-parser": "^3.0.0",
+    "nodemailer": "^6.9.14",
+    "dotenv": "^16.4.5"
+  },
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "license": "MIT"
+}
