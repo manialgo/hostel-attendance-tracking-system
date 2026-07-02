@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Report — Hostel Attendance Register</title>
+<link rel="stylesheet" href="/css/style.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+</head>
+<body>
+<div class="wrap">
+  <header class="masthead">
+    <div class="seal">Office of Student Affairs</div>
+    <h1>Hostel Attendance Register</h1>
+    <p>Attendance Summary Report</p>
+  </header>
+
+  <div class="top-bar">
+    <div class="who">Signed in as <b id="whoami">—</b></div>
+    <nav>
+      <a href="/dashboard.html">Back to Register</a>
+      <a href="#" id="downloadBtn">Download / Print Report</a>
+    </nav>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">Overall Attendance</h2>
+    <div class="stat-row" id="overallStats"></div>
+    <div class="charts-grid">
+      <div class="chart-box">
+        <h4>Overall Present vs Absent</h4>
+        <canvas id="overallChart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">Room-wise Attendance</h2>
+    <div class="charts-grid" id="roomCharts"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">Department-wise Attendance</h2>
+    <div class="charts-grid" id="deptCharts"></div>
+  </div>
+
+  <div class="card">
+    <h2 class="section-title">Year-wise Attendance</h2>
+    <div class="charts-grid" id="yearCharts"></div>
+  </div>
+
+  <p class="footer-note">Generated: <span id="generatedAt">—</span></p>
+</div>
+
+<script src="/js/report.js"></script>
+</body>
+</html>

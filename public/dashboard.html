@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Register — Hostel Attendance Register</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="wrap" style="max-width:1200px;">
+  <header class="masthead">
+    <div class="seal">Office of Student Affairs</div>
+    <h1>Hostel Attendance Register</h1>
+    <p>Room-wise daily attendance ledger</p>
+  </header>
+
+  <div class="top-bar">
+    <div class="who">Signed in as <b id="whoami">—</b></div>
+    <nav>
+      <a href="/upload.html">Import CSV</a>
+      <a href="/report.html">Attendance Report</a>
+      <a href="#" id="logoutLink">Sign Out</a>
+    </nav>
+  </div>
+
+  <div class="layout">
+    <!-- Sidebar: add a new entry, gated behind e-mail OTP -->
+    <aside class="sidebar card">
+      <h3>Add New Entry</h3>
+      <p style="font-size:12px; color:var(--muted);">Adding a record requires e-mail verification (OTP).</p>
+
+      <div id="otpStep1">
+        <label for="otpEmail">Your E-mail</label>
+        <input type="email" id="otpEmail" placeholder="you@institution.edu" />
+        <div class="form-actions">
+          <button class="small" id="sendOtpBtn">Send OTP</button>
+        </div>
+      </div>
+
+      <div id="otpStep2" style="display:none;">
+        <hr class="rule" />
+        <label for="otpCode">Enter OTP</label>
+        <input type="text" id="otpCode" maxlength="6" placeholder="6-digit code" />
+
+        <label for="newRoom">Room Number</label>
+        <input type="text" id="newRoom" />
+
+        <label for="newName">Student Name</label>
+        <input type="text" id="newName" />
+
+        <label for="newYear">Year of Study</label>
+        <input type="text" id="newYear" placeholder="e.g. 2nd Year" />
+
+        <label for="newDept">Department</label>
+        <input type="text" id="newDept" />
+
+        <div class="form-actions">
+          <button class="small maroon" id="verifyAddBtn">Verify &amp; Add</button>
+        </div>
+      </div>
+
+      <div id="sidebarMsg" class="msg"></div>
+    </aside>
+
+    <!-- Main register -->
+    <main>
+      <div class="card">
+        <h2 class="section-title">Student Register</h2>
+
+        <div class="stat-row" id="statRow"></div>
+
+        <div class="sort-controls">
+          <span style="align-self:center; font-size:13px; color:var(--muted);">Arrange by:</span>
+          <button class="small sort-btn active" data-sort="room">Room Number</button>
+          <button class="small sort-btn" data-sort="department">Department</button>
+          <button class="small sort-btn" data-sort="year">Year of Study</button>
+        </div>
+
+        <table class="register">
+          <thead>
+            <tr>
+              <th>Room No.</th>
+              <th>Student Name</th>
+              <th>Year of Study</th>
+              <th>Department</th>
+              <th>Present / Absent</th>
+            </tr>
+          </thead>
+          <tbody id="registerBody">
+            <tr><td colspan="5" style="text-align:center; color:var(--muted);">Loading…</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </main>
+  </div>
+
+  <p class="footer-note">Green = Present · Red = Absent (visual reference only)</p>
+</div>
+
+<script src="/js/dashboard.js"></script>
+</body>
+</html>

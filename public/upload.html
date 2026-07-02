@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Import Roll — Hostel Attendance Register</title>
+<link rel="stylesheet" href="/css/style.css" />
+</head>
+<body>
+<div class="wrap" style="max-width:620px;">
+  <header class="masthead">
+    <div class="seal">Office of Student Affairs</div>
+    <h1>Hostel Attendance Register</h1>
+    <p>Step 2 — Import the student roll (CSV)</p>
+  </header>
+
+  <div class="card">
+    <h2 class="section-title">Upload CSV Sheet</h2>
+    <p style="color:var(--muted); font-size:14px;">
+      The sheet must contain these four columns (any column order, header spelling is
+      case-insensitive): <b>Hostel Room Number</b>, <b>Name of the Student</b>,
+      <b>Year of Study</b>, <b>Department</b>.
+    </p>
+
+    <form id="uploadForm">
+      <label for="file">CSV File</label>
+      <div class="upload-drop">
+        <input type="file" id="file" name="file" accept=".csv" required />
+      </div>
+      <div class="form-actions">
+        <button type="submit">Import &amp; Continue</button>
+        <a class="btn secondary" href="/sample_students.csv" download style="text-decoration:none; padding:10px 18px; display:inline-block;">Download Sample Sheet</a>
+      </div>
+      <div id="msg" class="msg"></div>
+    </form>
+  </div>
+
+  <p class="footer-note">Once the sheet is received, the register opens automatically.</p>
+</div>
+
+<script>
+  // Guard: must be logged in to reach this page
+  fetch("/api/auth/session").then(r => r.json()).then(d => {
+    if (!d.loggedIn) window.location.href = "/index.html";
+  });
+
+  document.getElementById("uploadForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const msg = document.getElementById("msg");
+    msg.className = "msg";
+    const fileInput = document.getElementById("file");
+    if (!fileInput.files.length) return;
+
+    const formData = new FormData();
+    formData.append("file", fileInput.files[0]);
+
+    try {
+      const res = await fetch("/api/students/import", { method: "POST", body: formData });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || "Import failed.");
+      msg.textContent = `Imported ${data.imported} student record(s). Opening the register…`;
+      msg.className = "msg success";
+      setTimeout(() => (window.location.href = "/dashboard.html"), 900);
+    } catch (err) {
+      msg.textContent = err.message;
+      msg.className = "msg error";
+    }
+  });
+</script>
+</body>
+</html>
